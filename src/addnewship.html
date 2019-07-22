@@ -1,0 +1,659 @@
+<template>
+  <section id="tabss" class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#general" data-toggle="tab">General*</a></li>
+            <li><a href="#tankinfo" data-toggle="tab">Tanks Info*</a></li>
+            <li><a href="#hydrostatics" data-toggle="tab">HydroStatics*</a></li>
+            <li><a href="#memorandum" data-toggle="tab">Name and Address</a></li>
+            <li><button class="btn alert-warning" type="Save Data">Save Data </button></li>
+            <li><button class="btn btn-danger" click.delegate="cancelgoback()">CANCEL and go back</button></li>
+          </ul>
+
+          <div class="tab-content">
+
+            <div class="tab-pane active" id="general">
+              <!-- Main content -->
+              <!-- Main content -->
+              <section class="content">
+
+                <div class="row">
+
+
+                  <!-- left column -->
+                  <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">
+                          <span class="text-danger" show.bind="myPub.currenttanks.length < 3">Please update Tank data.</span><span class="text-danger" show.bind="myPub.currenthydro.length < 2">Please update HydroData.</span>
+                        </h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="box box-primary">
+
+                          <!-- /.box-header -->
+                          <!-- form start -->
+                          <div class="box-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-8">
+                                      <div class="input-group">
+                                        <span class="input-group-addon">NAME*</span>
+                                        <input type="text" class="form-control " placeholder="Ship Name" value.bind="myPub.currentship.Shipname" style="background-color:${myPub.currentship.Shipname ? 'white':'yellow'}" required name="Shipname" id="Shipname">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="input-group">
+                                        <span class="input-group-addon">CALLSIGN*</span>
+                                        <input type="text" class="form-control" placeholder="Call Sign" value.bind="myPub.currentship.Callsign" style="background-color:${myPub.currentship.Callsign ? 'white':'yellow'}" required name="Callsign" id="Callsign">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon">IMO</span>
+                                        <input type="number" class="form-control" placeholder="IMO Number" value.bind="myPub.currentship.IMONo" style="background-color:${myPub.currentship.IMONo ? 'white':'yellow'}" name="IMONo" id="IMONo">
+
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon">POR</span>
+                                        <input type="text" class="form-control" placeholder="Port of Registry" value.bind="myPub.currentship.POR" style="background-color:${myPub.currentship.POR ? 'white':'yellow'}" name="POR" id="POR">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon">Flag</span>
+                                        <input type="text" class="form-control" placeholder="Flag" value.bind="myPub.currentship.Flag" style="background-color:${myPub.currentship.Flag ? 'white':'yellow'}" name="Flag" id="Flag">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon">Class</span>
+                                        <input type="text" class="form-control" placeholder="Classification" value.bind="myPub.currentship.Classification" name="Classification" id="Classification" style="background-color:${myPub.currentship.Classification ? 'white':'yellow'}">
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <br />
+
+                            <div class="input-group">
+                              <blockquote>
+                                <p>
+                                  LBM is the distance between the Fore and Aft Draft Marks.<br />
+                                  LBP is the distance between perpendiculars.<br />
+                                  Da is the distance from Aft Perpendicular to Draft marks.<br />
+                                  Dm is the distance from Midship draft marks to Midship . Negative if it ford of Mid Draft Marks.
+                                  Da is the distance from Aft Draft Marks to Aft Perpendicular.
+                                  KEEL THICKNESS is in millimeters , All other values are in Metres.
+                                </p> <small>Information must come from: <cite>Stability Booklet or Master Device Document</cite></small>
+                              </blockquote>
+                            </div>
+
+
+
+
+                          </div>
+                          <!-- /.box-body -->
+
+                        </div>
+                      </div>
+                      <div class="panel-footer">
+                        Please fill in all values
+                      </div>
+                    </div>
+
+                  </div>
+                  <!--/.col (left) -->
+                  <!-- right column -->
+                  <div class="col-md-6">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">
+                          Ship Particulars. * Minimum required fields.
+                        </h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="box box-info">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="LightShip Weight">LightShip*</span>
+                                    <input type="number" [style.background-color]="myPub.currentship.LIGHTSHIP ? 'white' : 'yellow'" class="form-control" title="LightShip Weight" placeholder="Lightship Weight" value.bind="myPub.currentship.LIGHTSHIP" style="background-color:${myPub.currentship.LIGHTSHIP ? 'white':'yellow'}" required name="LIGHTSHIP" id="LIGHTSHIP">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Gross Registered Tonnage">GRT</span>
+                                    <input type="number" class="form-control" title="Gross Registered Tonnage" placeholder="Gross Registered Tonnage" value.bind="myPub.currentship.GRT" style="background-color:${myPub.currentship.GRT ? 'white':'yellow'}" name="GRT" id="GRT">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Keel Thickness if known">Keel Thickness*</span>
+                                    <input type="number" [style.background-color]="myPub.currentship.KEELPLATE ? 'white' : 'yellow'" class="form-control" title="Keel Thickness in mm if known otherwise enter 0" placeholder="Keel Thickness (Optional)" value.bind="myPub.currentship.KEELPLATE" style="background-color:${myPub.currentship.KEELPLATE ? 'white':'yellow'}" required name="KEELPLATE" id="KEELPLATE">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Net Rgistered Tonnage">NRT</span>
+                                    <input type="number" class="form-control" title="Net Rgistered Tonnage" placeholder="Net Registered Tonnage" value.bind="myPub.currentship.NRT" style="background-color:${myPub.currentship.NRT ? 'white':'yellow'}" name="NRT" id="NRT">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Length Between Perp">LBP*</span>
+                                    <input type="number" class="form-control" [style.background-color]="myPub.currentship.LBB ? 'white' : 'yellow'" title="Length Between Perp" placeholder="Length Bx Perp" value.bind="myPub.currentship.LBB" style="background-color:${myPub.currentship.LBB ? 'white':'yellow'}" required name="LBB" id="LBB">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Deadweight">DWT</span>
+                                    <input type="number" class="form-control" title="DeadWeight" placeholder="DeadWeight" value.bind="myPub.currentship.DWT" style="background-color:${myPub.currentship.DWT ? 'white':'yellow'}" name="DWT" id="DWT">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Length Between Draft Marks">LBM*</span>
+                                    <input type="number" class="form-control" title="Length Between Draft Marks" [style.background-color]="myPub.currentship.LBM ? 'white' : 'yellow'" placeholder="Length Between Draft Marks" value.bind="myPub.currentship.LBM" style="background-color:${myPub.currentship.LBM ? 'white':'yellow'}" required name="LBM" id="LBM">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Summer Draft">SDF</span>
+                                    <input type="number" class="form-control" title="Summer Draft" placeholder="Summer Draft" value.bind="myPub.currentship.Sdraft" value="${myPub.currentship.Sdraft}" style="background-color:${myPub.currentship.Sdraft ? 'white':'yellow'}" name="Sdraft" id="Sdraft">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Draft Mark Ford">Df*</span>
+                                    <input type="number" class="form-control" title="Draft Marks Forward , negative if aft of FP" [style.background-color]="myPub.currentship.Df ? 'white' : 'yellow'" placeholder="Draft Marks Ford" value.bind="myPub.currentship.Df" style="background-color:${myPub.currentship.Df ? 'white':'yellow'}" required name="Df" id="Df">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Depth Moulded">Depth(m)</span>
+                                    <input type="number" class="form-control" title="Depth Moulded" placeholder="Depth Moulded" [style.background-color]="myPub.currentship.DepthMoulded ? 'white' : 'yellow'" value.bind="myPub.currentship.DepthMoulded" style="background-color:${myPub.currentship.DepthMoulded ? 'white':'yellow'}" name="DepthMoulded" id="DepthMoulded">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Draft Marks Aft">Da*</span>
+                                    <input type="number" class="form-control" title="Draft Marks Aft , negative if aft of AP" placeholder="Draft Marks Aft" [style.background-color]="myPub.currentship.Da ? 'white' : 'yellow'" value.bind="myPub.currentship.Da" style="background-color:${myPub.currentship.Da ? 'white':'yellow'}" required name="Da" id="Da">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Depth Extreme">Depth(E)</span>
+                                    <input type="number" class="form-control" placeholder="Depth Extreme" value.bind="myPub.currentship.DepthExtreme" name="DepthExtreme" style="background-color:${myPub.currentship.DepthExtreme ? 'white':'yellow'}" id="DepthExtreme">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Draft Marks Midship">Dm*</span>
+                                    <input type="number" class="form-control" title="Draft Marks Midship, negative if aft of Midship" placeholder="Draft Marks Midship" value.bind="myPub.currentship.Dm" style="background-color:${myPub.currentship.Dm ? 'white':'yellow'}" required name="Dm" id="Dm">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="input-group">
+                                    <span class="input-group-addon" title="Breadth">Breadth*</span>
+                                    <input type="number" class="form-control" title="Breadth" placeholder="Breadth" [style.background-color]="myPub.currentship.Breadth ? 'white' : 'yellow'" value.bind="myPub.currentship.Breadth" style="background-color:${myPub.currentship.Breadth ? 'white':'yellow'}" required name="Breadth" id="Breadth">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel-footer">
+                        Please use data from Hydrostatic booklet.
+                      </div>
+                    </div>
+                    <!-- Horizontal Form -->
+
+                  </div>
+                </div>
+
+                <h3 class="xxtimeline-header">
+                  <a href="#">Measures </a>For your Reference
+                </h3>
+
+                <div class="xtimeline-body">
+                  <div class="xembed-responsive xembed-responsive-16by9">
+
+                    <img class="img img-responsive" src="/Images/draftmarks.PNG" />
+
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div class="tab-pane" id="tankinfo">
+              <!-- Main content -->
+              <div class="timeline-item">
+                <h3 class="timeline-header">
+                  <a href="#">Tank Data Tables</a>
+
+                </h3>
+                <div class="timeline-body">
+
+                  The system needs to have the tanks Information in order to calculate cargo.<b><i> For quick use you can enter a Single Entry as ALL and enter the TOTAL WEIGHT, leaving other parameters empty.</i></b><br />
+                  <button class="btn btn-success" click.delegate="createtanko()">Create Default Tank Data using total weight.</button>
+                  <span><button id="NewBtnTk" data-toggle="modal" data-target="#NewCreateModal" class="btn btn-info">Sample of Tanks CSV</button></span>
+                  <button show.bind="uploadfile==false" class="btn btn-default" click.deleffgate="showupload()">I want to upload my tank data in excel csv format</button>
+
+                </div>
+                <div class="timeline-footer">
+                  <div class="col-md-6 " repeat.for="file of selectedFiles">
+                    <button type="button" click.trigger="sendfile($index)" class="btn btn-info">Click here to upload ${file.name}: ${file.size / 1000} kb</button>
+                    <br />
+                    Last Modified: ${file.lastModifiedDate}
+                  </div>
+                </div>
+                <br />
+                <div class="timeline-footer">
+                  <div style="height: 50vh; overflow: auto" class="timeline-footer">
+                    <span>
+
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th></th>
+
+                            <th>TankType</th>
+                            <th>TankCode</th>
+                            <th>Tankname</th>
+                            <th>TankContent</th>
+                            <th>Volume</th>
+                            <th>Density</th>
+                            <th>Weight</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr repeat.for="item of myPub.currenttanks">
+                            <td width="100px"><button click.delegate="addtank($index)">Ins</button><button click.delegate="removetank($index)">Del</button></td>
+
+                            <td>
+                              <select value.bind="item.TankType">
+                                <option repeat.for="option of alltanktypeandname" value.bind="option.TankCode">${option.TankName}</option>
+                              </select>
+                            </td>
+                            <td> <input type="text" class="form-control" placeholder="0.0" value.bind="item.TankCode" name="data${$index}id" id="data${$index}id"></td>
+                            <td> <input type="text" class="form-control" placeholder="0.0" value.bind="item.Tankname" name="data${$index}id" id="data${$index}id"></td>
+                            <td> <input type="text" class="form-control" placeholder="0.0" value.bind="item.TankContent" name="data${$index}id" id="data${$index}id"></td>
+                            <td> <input type="number" class="form-control" placeholder="0.0" value.bind="item.Volume" name="data${$index}id" id="data${$index}id"></td>
+                            <td> <input type="number" class="form-control" placeholder="0.0" value.bind="item.Density" name="data${$index}id" id="data${$index}id"></td>
+                            <td> <input type="number" class="form-control" placeholder="0.0" value.bind="item.Weight" name="data${$index}data" id="data${$index}data"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </span>
+                  </div>
+
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary">Create Quick</button>
+                    <button type="button" class="btn btn-secondary">Delete All</button>
+                    <button type="button" class="btn btn-secondary">Create minimum Draft with Range</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="hydrostatics">
+
+
+
+              <div class="timeline-item">
+                <h3 class="timeline-header">
+                  <a href="#">HydroStatic Tables</a>
+                  <div show.bind="uploadfile" class="row">
+                    <div class="col-md-4">
+                      <input type="file" class="btn btn-success" accept="*.csv" files.bind="selectedFiles">
+                    </div>
+                    <div class="col-md-2">
+                      <a class="btn btn-primary btn-xs"><button id="NewBtn" data-toggle="modal" data-target="#NewCreateHydro" class="btn btn-primary">Sample of CSV</button></a>
+                    </div>
+
+                  </div>
+                </h3>
+                <div class="timeline-body">
+                  If you upload a CSV file then it must have DRAFT,DISPL,TPC,MCTC, LCF as the first Row as in the sample. You can use Excel to create an CSV file.
+                  You can select a particular range (eg between 7 to 9 meters). Later if you send in range (eg.between 9-11) this will be appended automatically.<br />
+                  <small><i>Please read the section in the On Line Manual - Creating a Hydro Table in sections.</i><button show.bind="uploadfile==false" click.delegate="showupload()">I want to upload my hydrostatic tables in excel csv format</button> </small>
+                </div>
+                <div class="timeline-footer">
+                  <div class="col-md-6 " repeat.for="file of selectedFiles ">
+                    <button type="button" click.trigger="sendfile($index)" class="btn btn-info">Click here to upload ${file.name}: ${file.size / 1000} kb</button>
+                    <br />
+                    Last Modified: ${file.lastModifiedDate}
+                  </div>
+
+                  <br />
+
+                </div>
+                <br />
+
+                <div style="height: 50vh; overflow: auto" class="timeline-footer">
+
+                  <span>
+
+                    <p show.bind="selectedFiles.length > 0">Your Hydrostatic Table imported from file</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Draft</th>
+                          <th>Displ</th>
+                          <th>TPC</th>
+                          <th>MCTC</th>
+                          <th>LCF</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr repeat.for="item of myPub.currenthydro">
+                          <td width="100px"><button click.delegate="addraft($index)">Ins</button><button click.delegate="removedraft($index)">Del</button></td>
+                          <td><strong><input type="number" value.bind="item.Draft" /></strong></td>
+                          <td><input type="number" value.bind="item.Displ" /></td>
+                          <td><input type="number" value.bind="item.TPC" /></td>
+                          <td><input type="number" value.bind="item.MCTC" /></td>
+                          <td><input type="number" value.bind="item.LCF" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </span>
+
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" click.delegate="sortdraft()" class="btn btn-secondary">Sort by Draft</button>
+                  <button type="button" class="btn btn-secondary">Delete All</button>
+                  <button type="button" class="btn btn-secondary">Create minimum Draft with Range</button>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="tab-pane" id="memorandum">
+              <textarea rows="10" class="form-control timeline-body" style="width: 100%">
+Your Office Name and Address
+</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" class="form-control" value="${myPub.currentship.Id}" name="Id" id="Id">
+  </section>
+
+  <div class="modal modal-info fade w-75" id="NewCreateModal">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Sample of Excel CSV Tank Information</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="box box-primary">
+              <div class="fosdsrm-horizontal bg-aqua-active">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">${myPub.currentship.Shipname}</h3>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel-group" id="panel-554459">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          If you are having difficulties uploading. Please email the file in any format to <b>support@avocetdata.com </b>and we shall convert the file for you.
+                        </div>
+                        <div id="panel-element-165768" class="panel-collapse expanded">
+                          <div class="panel-body">
+                            <div class="col-md-12">
+                              <blockquote>
+                                <p>
+                                  <b>Tank Types</b>
+                                  <br />
+                                  WB Water Ballast<br />
+                                  FW Drinking Water<br />
+                                  TW Treated Water<br />
+                                  FO Fuel Oil<br />
+                                  DO Diesel<br />
+                                  HO Hydraulic<br />
+                                  LO Lub Oil<br />
+                                  SL Slop<br />
+                                  BG Bilge Water<br />
+                                  MS Misc Tanks<br />
+                                  ET Environment Tank<br />
+                              </blockquote>
+                              <img class="img img-responsive" src="/images/tankdata.PNG" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-outline pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+
+  <div class="modal modal-info fade" id="NewCreateHydro">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Import from CSV </h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="box box-primary">
+              <div class="form-horizontal bg-aqua-active">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">${ currentship.Shipname}</h3>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel-group" id="panel-554459">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <button>HELP/Sample of CSV</button> <p>If you are having difficulties uploading. Please email the file in any format to<b> support@avocetdata.com </b>and we shall convert the file for you.</p>
+                        </div>
+                        <div id="panel-element-165768" class="panel-collapse expanded">
+                          <div class="panel-body">
+                            <div class="col-md-12">
+                              <blockquote>
+                                <p>
+                                  CSV File Rule for Conversion.<br />
+                                  <strong>For CSV </strong><br />the first row should be Draft,Displ,TPC,MCTC,LCF<br />
+                                  Draft Column MUST BE NAMED Draft or DRAFT.<br />
+                                  Displacement is SW MUST BE NAMED Displ or DISPL<br />
+                                  TPC Column must be called TPC<br />
+                                  MCTC must be called MCTC <br />
+                                  LCF from Midship or from Aft Must be called LCF.<br />
+                              </blockquote>
+                              <img src="/images/sampleexcel.png" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-outline pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+
+
+  <div class="modal modal-info fade" id="NewCreateCSV">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Create a CSV </h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="box box-primary">
+              <div class="form-horizontal bg-aqua-active">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">${ currentship.Shipname}</h3>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel-group" id="panel-554459">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <p>
+                            If you are having difficulties uploading. Please email the file in any format to<b> support@avocetdata.com </b>and we shall convert the file for you.
+                            <br />Each field must be seperated by a comma. <br />It is recommended that you create a text file and then paste it here.
+                          </p>
+                        </div>
+                        <div id="panel-element-165768" class="panel-collapse expanded">
+                          <div class="panel-body">
+                            <div class="col-md-12">
+                              <blockquote>
+                                <p>
+                                  The first row must be Draft,Displ,TPC,MCTC,LCF<br />LCF can be from amidship or from aft.
+                              </blockquote>
+                              <div class="form-group">
+                                <label class="bmd-label-floating"></label>
+                                <textarea value.bind="mycsv" class="form-control" rows="11">Draft,Displ,TPC,MCTC,LCF &#13;&#10;2,1000,23,70,-3.5 &#13;&#10;3,2000,23,72,-3.6 &#13;&#10;and so on.... </textarea>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-outline pull-left" (click)="readcsv()" data-dismiss="modal">Create File</button>
+          <button type="button" class="btn btn-success btn-outline pull-left" data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</template>

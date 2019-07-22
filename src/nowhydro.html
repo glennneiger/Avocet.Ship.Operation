@@ -1,0 +1,317 @@
+<!--<template>
+<require from="syncfusion-javascript/Content/ej/web/bootstrap-theme/ej.web.all.min.css"></require>
+  <require from="syncfusion-javascript/Content/ej/web/responsive-css/ej.responsive.css"></require>
+  <require from="syncfusion-javascript/Content/ej/web/ribbon-css/ej.icons.css"></require>
+  <div>
+    <ej-grid e-data-source.bind="shipDetails" e-allow-paging=true e-edit-settings.bind="editSettings" e-toolbar-settings.bind="toolbarItems">
+
+    </ej-grid>
+  </div>-->
+
+<template>
+  <ux-dialog>
+
+    <ux-dialog-header>
+
+      <!--<button type="button" click.trigger="controller.cancel()" class="btn btn-info btn-sm"
+              title="Close">
+        <i class="fa fa-times"></i>
+      </button>-->
+
+    </ux-dialog-header>
+
+    <div class="box-body">
+
+      <div class="box-body">
+        <require from="resources/value-converters/filelisttoarray"></require>
+        <require from="resources/value-converters/blobtourl"></require>
+        <require from="resources/value-converters/validdraft"></require>
+        <form role="form" id="newshipform" name="newshipform">
+
+
+
+
+          <h2 class="page-header">Ship Informmation</h2>
+
+          <div class="row">
+          <div class="col-md-12">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab">Ship Info</a></li>
+                <li><a href="#tab_2" data-toggle="tab">Hydrostatics</a></li>
+                <li><a href="#tab_3" data-toggle="tab">Tanks</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        <span class="text-danger">These changes will apply to this observation unless saved.</span>
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="box box-primary">
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <div class="box-body">
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="row">
+                                  <div class="col-md-8">
+                                    <div class="input-group">
+                                      <span class="input-group-addon">NAME*</span>
+                                      <input type="text" class="form-control " placeholder="Ship Name" value.bind="myPub.currentship.Shipname" style="background-color:$ {myPub.currentship.Shipname ? 'white':'yellow'}" readonly name="Shipname" id="Shipname">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="input-group">
+                                      <span class="input-group-addon">CALLSIGN*</span>
+                                      <input type="text" class="form-control" placeholder="Call Sign" value.bind="myPub.currentship.Callsign" style="background-color:$ {myPub.currentship.Callsign ? 'white':'yellow'}" readonly name="Callsign" id="Callsign">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <br />
+
+                          </div>
+                          <div class="panel-body">
+                            <div class="box box-info">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="LightShip Weight">LightShip</span>
+                                        <input type="number" [style.background-color]="myPub.currentship.LIGHTSHIP ? 'white' : 'yellow'" class="form-control" title="LightShip Weight" placeholder="Lightship Weight" value.bind="myPub.currentship.LIGHTSHIP" style="background-color:$ {myPub.currentship.LIGHTSHIP ? 'white':'yellow'}" required name="LIGHTSHIP" id="LIGHTSHIP">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Gross Registered Tonnage">Keel Thickness</span>
+                                        <input type="number" [style.background-color]="myPub.currentship.KEELPLATE ? 'white' : 'yellow'" class="form-control" title="Keel Thickness in mm if known otherwise enter 0" placeholder="Keel Thickness (Optional)" value.bind="myPub.currentship.KEELPLATE" style="background-color:$ {myPub.currentship.KEELPLATE ? 'white':'yellow'}" required name="KEELPLATE" id="KEELPLATE">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Keel Thickness if known">LBP</span>
+                                        <input type="number" [style.background-color]="myPub.currentship.KEELPLATE ? 'white' : 'yellow'" class="form-control" title="Keel Thickness in mm if known otherwise enter 0" placeholder="Keel Thickness (Optional)" value.bind="myPub.currentship.KEELPLATE" style="background-color:$ {myPub.currentship.KEELPLATE ? 'white':'yellow'}" required name="KEELPLATE" id="KEELPLATE">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Net Rgistered Tonnage">LBM</span>
+                                        <input type="number" class="form-control" title="Net Rgistered Tonnage" placeholder="Net Registered Tonnage" value.bind="myPub.currentship.NRT" style="background-color:$ {myPub.currentship.NRT ? 'white':'yellow'}" name="NRT" id="NRT">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Length Between Perp">Df</span>
+                                        <input type="number" class="form-control" [style.background-color]="myPub.currentship.LBB ? 'white' : 'yellow'" title="Length Between Perp" placeholder="Length Bx Perp" value.bind="myPub.currentship.LBB" style="background-color:$ {myPub.currentship.LBB ? 'white':'yellow'}" required name="LBB" id="LBB">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Deadweight">Da</span>
+                                        <input type="number" class="form-control" title="DeadWeight" placeholder="DeadWeight" value.bind="myPub.currentship.DWT" style="background-color:$ {myPub.currentship.DWT ? 'white':'yellow'}" name="DWT" id="DWT">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Length Between Draft Marks">Dm</span>
+                                        <input type="number" class="form-control" title="Length Between Draft Marks" [style.background-color]="myPub.currentship.LBM ? 'white' : 'yellow'" placeholder="Length Between Draft Marks" value.bind="myPub.currentship.LBM" style="background-color:$ {myPub.currentship.LBM ? 'white':'yellow'}" required name="LBM" id="LBM">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon" title="Summer Draft">Breadth</span>
+                                        <input type="number" class="form-control" title="Summer Draft" placeholder="Summer Draft" value.bind="myPub.currentship.Sdraft" value="${myPub.currentship.Sdraft}" style="background-color:$ {myPub.currentship.Sdraft ? 'white':'yellow'}" name="Sdraft" id="Sdraft">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                            </div>
+                          </div>
+
+
+
+                        </div>
+                        <!-- /.box-body -->
+
+                      </div>
+                    </div>
+                    <div class="panel-footer">
+                      Please fill in all values
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab_2">
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Hydrostatic Details. <button class="btn btn-sm btn-default pull-right">Save Changes </button>
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="timeline-item">
+                        <div style="height: 50vh; overflow: auto" class="timeline-footer">
+                          <span>
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Draft</th>
+                                  <th>Displ</th>
+                                  <th>TPC</th>
+                                  <th>MCTC</th>
+                                  <th>LCF</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr repeat.for="item of myPub.currenthydro">
+                                  <td width="100px"><button click.delegate="addraft($index)">Ins</button><button click.delegate="removedraft($index)">Del</button></td>
+                                  <td><strong><input type="number" value.bind="item.Draft" /></strong></td>
+                                  <td><input type="number" value.bind="item.Displ" /></td>
+                                  <td><input type="number" value.bind="item.TPC" /></td>
+                                  <td><input type="number" value.bind="item.MCTC" /></td>
+                                  <td><input type="number" value.bind="item.LCF" /></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </span>
+
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" click.delegate="sortdraft()" class="btn btn-secondary">Sort by Draft</button>
+                          <button type="button" class="btn btn-secondary">Delete All</button>
+                          <button type="button" class="btn btn-secondary">Create minimum Draft with Range</button>
+                        </div>
+
+
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_3">
+                  <div class="timeline-item">
+                    <h3 class="timeline-header">
+                      <a href="#">Tank Data Tables</a>
+
+                    </h3>
+                    <div class="timeline-body">
+
+                      The system needs to have the tanks Information in order to calculate cargo.<b><i> For quick use you can enter a Single Entry as ALL and enter the TOTAL WEIGHT, leaving other parameters empty.</i></b><br />
+                      <button class="btn btn-success" click.delegate="createtanko()">Create Default Tank Data using total weight.</button>
+                      <span><button id="NewBtnTk" data-toggle="modal" data-target="#NewCreateModal" class="btn btn-info">Sample of Tanks CSV</button></span>
+                      <button show.bind="uploadfile==false" class="btn btn-default" click.deleffgate="showupload()">I want to upload my tank data in excel csv format</button>
+
+                    </div>
+                    <div class="timeline-footer">
+                      <div class="col-md-12 " repeat.for="file of selectedFiles | fileListToArray">
+                        <button type="button" click.trigger="sendfile($index)" class="btn btn-info">Click here to upload ${file.name}: ${file.size / 1000} kb</button>
+                        <br />
+                        Last Modified: ${file.lastModifiedDate}
+                      </div>
+                    </div>
+                    <br />
+                    <div class="timeline-footer">
+                      <div style="height: 50vh; overflow: auto" class="timeline-footer">
+                        <span>
+
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th></th>
+
+                                <th>TankType</th>
+                                <th>TankCode</th>
+                                <th>Tankname</th>
+                                <th>TankContent</th>
+                                <th>Volume</th>
+                                <th>Density</th>
+                                <th>Weight</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr repeat.for="item of myPub.currenttanks">
+                                <td width="100px"><button click.delegate="addtank($index)">Ins</button><button click.delegate="removetank($index)">Del</button></td>
+
+                                <td>
+                                  <select value.bind="item.TankType">
+                                    <option repeat.for="option of alltanktypeandname" value.bind="option.TankCode">${option.TankName}</option>
+                                  </select>
+                                </td>
+                                <td> <input type="text" class="form-control" placeholder="0.0" value.bind="item.TankCode" name="data${$index}id" id="data${$index}id"></td>
+                                <td> <input type="text" class="form-control" placeholder="0.0" value.bind="item.Tankname" name="data${$index}id" id="data${$index}id"></td>
+                                <td> <input type="text" class="form-control" placeholder="0.0" value.bind="item.TankContent" name="data${$index}id" id="data${$index}id"></td>
+                                <td> <input type="number" class="form-control" placeholder="0.0" value.bind="item.Volume" name="data${$index}id" id="data${$index}id"></td>
+                                <td> <input type="number" class="form-control" placeholder="0.0" value.bind="item.Density" name="data${$index}id" id="data${$index}id"></td>
+                                <td> <input type="number" class="form-control" placeholder="0.0" value.bind="item.Weight" name="data${$index}data" id="data${$index}data"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </span>
+                      </div>
+
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Create Quick</button>
+                        <button type="button" class="btn btn-secondary">Delete All</button>
+                        <button type="button" class="btn btn-secondary">Create minimum Draft with Range</button>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+                <!-- /.tab-pane -->
+              </div>
+              <!-- /.tab-content -->
+            </div>
+            <!-- nav-tabs-custom -->
+          </div>
+          </div>
+
+            <section id="stabs" class="content">
+              <input type="hidden" class="form-control" value="${myPub.currentship.Id}" name="Id" id="Id">
+            </section>
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+
+  </ux-dialog>
+</template>
+

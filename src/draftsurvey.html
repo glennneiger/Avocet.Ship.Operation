@@ -1,0 +1,59 @@
+<template>
+
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>D</b>S</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Vsl:</b>&nbsp; ${myPub.currentship.Shipname}</span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav id="mainwrapper" style="visibility: " class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+
+          <li class="nav-item pull-left">
+            <a class="nav-link" href="https://localhost:44356/servicestatus">DashBoard</a>
+          </li>
+          <li class="nav-item pull-left">
+            <a class="nav-link" title="Load new schema which will be used by the Rule Engine" href="dashboard">My Ships</a>
+          </li>
+          <li class="nav-item pull-left">
+            <a class="nav-link" title="Load new schema which will be used by the Rule Engine" href="schemamenu">Stability and Trim</a>
+          </li>
+          <li class="nav-item pull-left">
+            <a class="nav-link" title="Load new schema which will be used by the Rule Engine" href="rulebookmenu">Draft Survey</a>
+          </li>
+
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i>Log Out</a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Info boxes -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="info-box">
+          <compose view-model=${currentViewModelPath} model.bind="myPub" compose.ref="draftRef" containerless></compose>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+

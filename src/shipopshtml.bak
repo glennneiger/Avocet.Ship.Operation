@@ -1,0 +1,63 @@
+<template>
+  <!--Add Syncfusion JavaScript themes here-->
+  <require from="syncfusion-javascript/Content/ej/web/bootstrap-theme/ej.web.all.min.css"></require>
+  <require from="syncfusion-javascript/Content/ej/web/responsive-css/ej.responsive.css"></require>
+  <require from="syncfusion-javascript/Content/ej/web/ribbon-css/ej.icons.css"></require>
+  <style type="text/css">
+    .e-gallerycontent1 {
+      background-position: 0 -105px;
+    }
+
+    .e-gallerycontent2 {
+      background-position: -69px -105px;
+    }
+
+    .e-gallerycontent3 {
+      background-position: -136px -105px;
+    }
+
+    .e-gallerycontent4 {
+      background-position: 0 -53px;
+    }
+
+    .e-gbtnposition {
+      margin-top: 5px;
+    }
+
+    .e-gbtnimg {
+      background-image: url("images/ribbon/homegallery.png");
+      background-repeat: no-repeat;
+      height: 64px;
+      width: 64px;
+    }
+  </style>
+  <section class="content">
+    <header class="main-header">
+
+
+      <div style="height: 70px;width:100%">
+        <ej-ribbon id="Ribbon" e-width="100%" e-application-tab.bind="ApplicationTab" e-tabs.bind="Tabs"></ej-ribbon>
+      </div>
+
+
+    </header>
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          Loading the controol here with the nam eof te active ship
+        </div>
+      </div>
+      <div class="row">
+        <compose view-model=${currentViewModelPath} model.bind="currentitem" compose.ref="composeRef" containerless></compose>
+      </div>
+    </div>
+
+  </section>
+
+
+</template>
+

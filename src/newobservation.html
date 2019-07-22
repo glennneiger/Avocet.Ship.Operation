@@ -1,0 +1,410 @@
+<template>
+  <!--<require from="./default.css"></require>-->
+  <div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-success">
+                &nbsp;&nbsp;${dynerror}
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Draft Survey Observation
+                    <div class="box-tools pull-right" style="vertical-align: top">
+                      <Button style="position: relative; top: -8px" class="btn btn-danger btn-sm" click.delegate="cancelgoback()">CANCEL and go back</Button>
+                      <Button style="position: relative; top: -8px" class="btn btn-success btn-sm" click.delegate="doupdatehydro()">Edit Ship Data</Button>
+                      <Button style="position: relative; top: -8px" class="btn btn-info btn-sm" click.delegate="bola()">Save Observation</Button>
+
+                    </div>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="box-body">
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Shipname</span>
+                          <input type="text" class="form-control" value.bind="myPub.currentship.Shipname" readonly name="shipname" id="shipname">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Voy No </span>
+                          <input type="text" class="form-control" value.bind="myPub.currentobserved.VoyNo" name="voyage" id="voyage">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="box-body">
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Call Sign</span>
+                          <input type="text" class="form-control" value.bind="myPub.currentship.CallSign" readonly name="callsign" id="callsign">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Port</span>
+                          <input type="text" class="form-control" value.bind="myPub.currentobserved.Port" name="port" id="port">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Enter your observations (METRIC)
+                    <div class="box-tools pull-right" style="vertical-align: top">
+
+                      <Button click.delegate="calculations()" show.bind="draftiscorrect">Calculate</Button>
+                    </div>
+                  </h3>
+                </div>
+                <div class="panel-body">
+
+                  <div class="row">
+                    <div class="box-body">
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Ford Port</span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.FordPort"  placeholder="Draft Ford Port">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Ford Stbd </span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.FordStbd"  placeholder="Draft Ford Stbd">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="box-body">
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Aft Port</span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.AftPort" placeholder="Draft Aft Port">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Aft Stbd </span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.AftStbd"  placeholder="Draft Ford Stbd">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="box-body">
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Mid Port</span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.MidPort"  placeholder="Draft Mid Port">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+
+                        <div class="input-group">
+                          <span class="input-group-addon">Mid Stbd </span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.MidStbd"  placeholder="Draft Mid Stbd">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="box-body">
+                      <div class="col-md-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Density</span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.Density"  placeholder="Density">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">List</span>
+                          <input type="number" class="form-control" value.bind="myPub.currentobserved.List"  placeholder="List">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer">
+                  <label>Weather:</label>
+
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" value.bind="myPub.currentobserved.Weather" class="form-control">
+                  </div>
+                  <label>Date and Time of Observation:</label>
+                  <div class="box-body">
+                    <div class="col-md-6">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="date" class="form-control" value.bind="myPub.currentobserved.Dated" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="input-group">
+
+                        <div class="input-group">
+                          <input type="time" value.bind="myPub.currentobserved.Timed" class="form-control timepicker">
+
+                          <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    Deductibles
+                    <div class="box-tools pull-right" style="vertical-align: top">
+
+                      <Button click.delegate="DoUpdateTanks()">Edit Tanks</Button>
+
+                    </div>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                  <table style="width: 100%">
+                    <tr>
+                      <td style="width: 130px">Ballast</td>
+                      <td>${myPub.currentsurvey.ballast}</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Fresh water</td>
+                      <td>${myPub.currentsurvey.freshwater}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Treated water</td>
+                      <td>${myPub.currentsurvey.treated}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Fuel</td>
+                      <td>${myPub.currentsurvey.fuel}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Diesel</td>
+                      <td>${myPub.currentsurvey.diesel}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">luboil</td>
+                      <td>${myPub.currentsurvey.luboil}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Hyd Oil</td>
+                      <td>${myPub.currentsurvey.hydraulicoil}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Slop</td>
+                      <td>${myPub.currentsurvey.slop}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Bilge</td>
+                      <td>${myPub.currentsurvey.bilge}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Misc</td>
+                      <td>${myPub.currentsurvey.misc}&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 130px">Environment Tk</td>
+                      <td>${myPub.currentsurvey.environment}&nbsp;</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="panel-footer">
+                  Constant : <input type="number" class="form-control" [style.background-color]="myPub.currentobserved.Constant ? 'white' : 'yellow'" title="Enter Constant for this Observation" placeholder="CONSTANT" value.bind="myPub.currentobserved.Constant" style="background-color:${myPub.currentobserved.Constant ? 'white':'yellow'}" required name="constant" id="constant">
+                  Cargo to load : <input type="number" class="form-control" [style.background-color]="myPub.currentobserved.Cargotoload ? 'white' : 'yellow'" title="Enter total cargo to load" placeholder="Cargo to load" value.bind="myPub.currentobserved.Cargotoload" style="background-color:${myPub.currentobserved.Cargotoload ? 'white':'yellow'}" required name="cargotoload" id="cargotoload">
+
+                </div>
+
+              </div>
+
+              <div class="box-body">
+                <div class="info-box-contexcnt">
+                  <span class="info-box-text">CARGO ABOARD</span>
+                  <span class="info-box-number">${myPub.currentsurvey.cargo}</span>
+                </div>
+                <div class="info-box-coxcntent">
+                  <span class="info-box-text alert-success">CARGO BALANCE</span>
+                  <span class="info-box-number alert-success">${myPub.currentsurvey.cargotoload -myPub.currentsurvey.cargo}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              Result
+              <div class="box-tools pull-right">
+                <button>Save Observation</button>
+              </div>
+            </div>
+            <div class="panel-body">
+
+              <table class="table table-striped table-bordered">
+                <tr style="width: 189px">
+                  <td style="width: 111px">Marks</td>
+                  <td style="width: 102px">Corr</td>
+                  <td style="width: 132px">Mean</td>
+                  <td style="width: 131px">Corrected</td>
+                </tr>
+
+                <tr>
+                  <td style="width: 189px">Ford</td>
+                  <td style="width: 102px">${myPub.currentsurvey.fordcorr}</td>
+                  <td style="width: 96px">${myPub.currentsurvey.fordmean}</td>
+                  <td style="width: 132px">${myPub.currentsurvey.fordcorrd}</td>
+                </tr>
+
+                <tr>
+                  <td style="width: 189px">Aft</td>
+                  <td style="width: 102px">${myPub.currentsurvey.aftcorr}</td>
+                  <td style="width: 96px">${myPub.currentsurvey.aftmean}</td>
+                  <td style="width: 132px">${myPub.currentsurvey.aftcorrd}</td>
+                 
+                </tr>
+
+                <tr>
+                  <td style="width: 189px">Mid</td>
+                  <td style="width: 102px">${myPub.currentsurvey.midcorr}</td>
+                  <td style="width: 96px">${myPub.currentsurvey.midmean}</td>
+                  <td style="width: 132px">${myPub.currentsurvey.midcorrd}</td>
+                </tr>
+
+                <tr>
+                  <td style="width: 189px">Keel Thickness</td>
+                  <td style="width: 102px">${myPub.currentship.KEELPLATE}</td>
+                  <td colspan="3">&nbsp;</td>
+                </tr>
+
+                <tr>
+                  <td style="width: 189px; height: 23px;">Mean Draft</td>
+                  <td style="width: 102px; height: 23px;">${myPub.currentsurvey.meandraft}</td>
+                  <td style="height: 23px;" colspan="3">Keel Corr Applied</td>
+                  <td colspan="3">Yes</td>
+                </tr>
+
+                <tr>
+                  <td style="width: 189px">Hog /Sag</td>
+                  <td style="width: 102px">${myPub.currentsurvey.hogorsag}</td>
+                  <td colspan="3"></td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">M of M</td>
+                  <td style="width: 102px">${myPub.currentsurvey.meanofmean}</td>
+                  <td style="width: 96px">&nbsp;</td>
+                  <td style="width: 132px">&nbsp;</td>
+                 
+                </tr>
+                <tr>
+                  <td style="width: 189px">Displacement</td>
+                  <td style="width: 102px">${myPub.currentsurvey.displ}</td>
+                  <td style="width: 96px">&nbsp;</td>
+                  <td colspan="2" class="bg-aqua">Hydrostatics</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">Trim Corr1</td>
+                  <td style="width: 102px">${myPub.currentsurvey.mctc1}</td>
+                 
+                  <td style="width: 132px" class="bg-gray">True Trim</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.truetrim}</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">Trim Corr 2</td>
+                  <td style="width: 102px">${myPub.currentsurvey.mctc2}&nbsp;</td>
+                
+                  <td style="width: 132px" class="bg-gray">LCF</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.lcf}</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">List Corr</td>
+                  <td style="width: 102px">${myPub.currentsurvey.listcorr}</td>
+                  
+                  <td style="width: 132px" class="bg-gray">TPC</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.tpc}</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">Displ w Corr</td>
+                  <td style="width: 102px">${myPub.currentsurvey.dispwcorr}</td>
+                  
+                  <td style="width: 132px" class="bg-gray">MCTC 1</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.mctc1}</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">Density Corr</td>
+                  <td style="width: 102px">${myPub.currentsurvey.densitycorr}</td>
+                 
+                  <td style="width: 132px" class="bg-gray">MCTC 2</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.mctc2}</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">Displ Density</td>
+                  <td style="width: 102px">${myPub.currentsurvey.displatdensity}</td>
+                  
+                  <td style="width: 132px" class="bg-gray">TPC 1</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.tpc1}</td>
+                </tr>
+                <tr>
+                  <td style="width: 189px">Deductible</td>
+                  <td style="width: 102px">${myPub.currentsurvey.deductible}</td>
+                 
+                  <td style="width: 132px" class="bg-gray">TPC 2</td>
+                  <td style="width: 131px" class="bg-gray">${myPub.currentsurvey.tpc2}</td>
+                </tr>
+
+
+              </table>
+
+            </div>
+            <div class="panel-footer">
+              Information is not saved.
+              <input type="hidden" id="shipid" />
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</template>
+

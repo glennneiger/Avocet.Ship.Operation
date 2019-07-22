@@ -1,0 +1,109 @@
+<template>
+
+<section class="content-header">
+  <a href="*" ref="shipRef" show.bind="showlogin" click.delegate="gotologin()"><i class="fa fa-dashboard"></i>Login to site</a>
+  <ol class="breadcrumb">
+    <li><button ref="shipRef" click.delegate="logoutlogin()"><i class="fa fa-dashboard"></i>${loginlogout}</button></li>
+  </ol>
+</section>
+
+
+<div Style="padding: 30px">
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12" style="cursor:grabbing" click.trigger="goto()">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="fa fa-ship"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text text-green">CREATE NEW DATA</span>
+          <span class="info-box-number"><small>Add a new Ship</small></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12" style="cursor:crosshair" repeat.for="ship of shiplist">
+      <div class="info-box">
+        <span  click.delegate="activateship($index)" class="info-box-icon bg-green"><i class="fa fa-ship align-bottom"></i></span>
+        <div class="info-box-content bg-light-blue-gradient">
+          <span  click.delegate="activateship($index)" class="info-box-number">${ship.shipname} <br /> CallSign:${ship.callsign}</span>
+          <button click.delegate="selectship($index)" class="btn btn-sm btn-warning btn-block">Show All Observations</button>
+        </div>
+     
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+  </div>
+</div>
+
+<div class="box-header">
+  <h2 class="box-title">Active Ship:<b> ${myPub.currentship.Shipname} </b></h2>
+</div>
+<div class="box-header">
+  <h3 class="box-title">Record of Observations  <small class="text-success">${makenewmessage}</small> </h3>
+</div>
+<!-- /.box-header -->
+<div class="box-body">
+  <table id="example2" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th title="Create a new observation using the this starting value.">New Obs</th>
+        <th>Report</th>
+        <th>VoyNo</th>
+        <th>Port Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Ford</th>
+        <th>Aft</th>
+        <th>Mean</th>
+        <th>Fuel</th>
+        <th>Diesel</th>
+        <th>Ballast</th>
+        <th>Fresh Water</th>
+        <th>Constant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="voy of myPub.currentallsurvey">
+        <td width="25px"><button class="btn btn-sm btn-primary" click.delegate="loadcurrentvoyage($index)">New Obs</button></td>
+        <td width="25px"><button class="btn btn-sm btn-info ">View</button>  </td>
+        <td>${voy.voyNo}</td>
+        <td>${voy.port}</td>
+        <td>${voy.dated}</td>
+        <td>${voy.timed}</td>
+        <td>${voy.fordcorr}</td>
+        <td>${voy.aftcorr}</td>
+        <td>${voy.midcorr}</td>
+        <td>${voy.fuel}</td>
+        <td>${voy.diesel}</td>
+        <td>${voy.ballast}</td>
+        <td>${voy.freshwater}</td>
+        <td>${voy.constant}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th title="Create a new observation using this observation as starting value.">New Obs</th>
+        <th>Report</th>
+        <th>VoyNo</th>
+        <th>Port Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Ford</th>
+        <th>Aft</th>
+        <th>Mean</th>
+        <th>Fuel</th>
+        <th>Diesel</th>
+        <th>Ballast</th>
+        <th>Fresh Water</th>
+        <th>Constant</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+</template>

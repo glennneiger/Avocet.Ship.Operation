@@ -1,0 +1,50 @@
+<template>
+
+      <div class="login-box">
+        <div class="login-logo">
+          <a href="/../index.html"><b>Draft</b>Survey</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+          <div class="form-group has-feedback">
+            <input type="email" value.bind="useremail" class="form-control" required placeholder="Email">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" value.bind="userpassword" class="form-control" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback" show.bind="isNew">
+            <input type="password" class="form-control" value.bind="userpasswordagain" placeholder="Retype Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 pull-right" show.bind="isNewuser">
+              <button type="submit" class="btn btn-primary btn-block pull-right" click.trigger="SignIn()">Sign In</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 pull-right" show.bind="isNew">
+              <button ref="registerButton" type="submit" class="btn btn-danger btn-block pull-right" click.trigger="registeruser()">Register</button>
+            </div>
+          </div>
+          <br />
+          <div show.bind="isCode">
+            <div class="input-group">
+              <input type="text" name="message" value.bind="receivedcode" placeholder="Enter Received Code ..." class="form-control">
+              <span class="input-group-btn">
+                <button type="button" click.delegate="verifyandcontinue()" class="btn btn-primary btn-flat">Continue</button>
+              </span>
+            </div>
+          </div>
+
+          <a if.bind="isNewuser" href="#" click.delegate="resendmypassword()">I forgot my password</a><br>
+          <a if.bind="isNewuser" href="#" click.delegate="hideisnewuser()" class="text-center">Register a new membership</a>
+        </div>
+        <!-- /.login-box-body -->
+      </div>
+      <ai-dialog-footer>
+        <button click.trigger="controller.cancel()">Cancel</button>
+      </ai-dialog-footer>
+</template>
+

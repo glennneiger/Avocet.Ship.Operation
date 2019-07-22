@@ -1,0 +1,84 @@
+<template>
+  <!--Add Syncfusion JavaScript themes here-->
+  <require from="syncfusion-javascript/Content/ej/web/bootstrap-theme/ej.web.all.min.css"></require>
+  <require from="syncfusion-javascript/Content/ej/web/responsive-css/ej.responsive.css"></require>
+  <require from="syncfusion-javascript/Content/ej/web/ribbon-css/ej.icons.css"></require>
+  <style type="text/css">
+    .e-gallerycontent1 {
+      background-position: 0 -105px;
+    }
+
+    .e-gallerycontent2 {
+      background-position: -69px -105px;
+    }
+
+    .e-gallerycontent3 {
+      background-position: -136px -105px;
+    }
+
+    .e-gallerycontent4 {
+      background-position: 0 -53px;
+    }
+
+    .e-gbtnposition {
+      margin-top: 5px;
+    }
+
+    .e-gbtnimg {
+      background-image: url("images/ribbon/homegallery.png");
+      background-repeat: no-repeat;
+      height: 64px;
+      width: 64px;
+    }
+  </style>
+  <section class="content">
+    <header class="main-header">
+
+
+      <div style="height: 70px;width:100%">
+        <ej-ribbon id="Ribbon" e-width="100%" e-application-tab.bind="ApplicationTab" e-tabs.bind="Tabs"></ej-ribbon>
+      </div>
+
+
+    </header>
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          Toolbar Herer
+        </div>
+      </div>
+      <div class="row">
+        <div style="width: 100%; height: 80vH; background-color: aqua" class="col-md-12">
+          <div>
+            <ej-grid e-data-source.two-way="gridData" e-allow-paging=true e-allow-sorting=true e-on-record-click.delegate="recordClick($event.detail)">
+              <ej-column e-field="OrderID" e-header-text="Order ID" e-text-align="right"></ej-column>
+              <ej-column e-field="CustomerID" e-header-text="Customer ID"></ej-column>
+              <ej-column e-field="EmployeeID" e-header-text="Employee ID" e-text-align="right"></ej-column>
+              <ej-column e-field="Freight" e-header-text="Freight" e-format="{0:C}" e-text-align="right"></ej-column>
+              <ej-column e-field="OrderDate" e-header-text="Order Date" e-format="{0:MM/dd/yyyy}" e-text-align="right"></ej-column>
+            </ej-grid>
+          </div>
+
+        </div>
+      </div>
+      <div style="height: 5vH" class="row">
+        <div class="col-md-4">
+          sdfdsfsd
+        </div>
+        <div class="col-md-4">
+          sdfdsfd
+        </div>
+        <div class="col-md-4">
+          sfsdfsdf
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+</template>
