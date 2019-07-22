@@ -1,0 +1,73 @@
+{
+  "name": "avocet-ship-operation",
+  "description": "An Aurelia client application.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "???",
+    "url": "???"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "alasql": "^0.4.11",
+    "aurelia-animator-css": "^1.0.4",
+    "aurelia-api": "^3.2.1",
+    "aurelia-bootstrapper": "^2.3.2",
+    "aurelia-dialog": "^2.0.0-rc.6",
+    "aurelia-fetch-client": "^1.8.2",
+    "aurelia-syncfusion-bridge": "^8.6.7-beta",
+    "aurelia-validation": "^1.4.0",
+    "jqueryui": "^1.11.1",
+    "moment": "^2.24.0",
+    "sweetalert2": "^8.14.0",
+    "syncfusion-javascript": "^17.1.47",
+    "toastr": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/ej.web.all": "^17.1.1",
+    "@types/jquery": "^3.3.30",
+    "@types/lodash": "^4.14.117",
+    "@types/node": "^10.11.6",
+    "@types/webpack": "^4.4.15",
+    "aspnet-webpack": "^3.0.0",
+    "aurelia-cli": "^1.0.1",
+    "aurelia-testing": "^1.0.0",
+    "aurelia-tools": "^2.0.0",
+    "aurelia-webpack-plugin": "^3.0.0",
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^5.0.0",
+    "css-loader": "^1.0.0",
+    "del": "^3.0.0",
+    "duplicate-package-checker-webpack-plugin": "^3.0.0",
+    "expose-loader": "^0.7.5",
+    "file-loader": "^2.0.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "json-loader": "^0.5.7",
+    "mini-css-extract-plugin": "^0.4.3",
+    "minimatch": "^3.0.4",
+    "opn": "^5.4.0",
+    "promise-polyfill": "^8.1.0",
+    "style-loader": "^0.23.1",
+    "through2": "^3.0.0",
+    "ts-loader": "^5.2.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.2",
+    "url-loader": "^1.1.2",
+    "vinyl-fs": "^3.0.3",
+    "webpack": "^4.27.0",
+    "webpack-bundle-analyzer": "^3.0.4",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-hot-middleware": "^2.24.3"
+  },
+  "scripts": {
+    "build": "au build",
+    "start": "au run"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  }
+}
